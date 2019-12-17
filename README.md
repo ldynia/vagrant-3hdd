@@ -20,4 +20,4 @@ $ vboxmanage showvminfo sandbox
 ```
 
 # Notes
-Remember to run vagrant `destroy`
+Remember to run `vagrant destroy`.
