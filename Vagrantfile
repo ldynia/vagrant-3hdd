@@ -1,20 +1,5 @@
-# Prioriy to running `vagrant up` you have to do:
-# 1) Craete HDDs
-# {
-#   vboxmanage createmedium --filename $PWD/disk-1.vdi --size 1024 --format VDI
-#   vboxmanage createmedium --filename $PWD/disk-2.vdi --size 1024 --format VDI
-#   vboxmanage createmedium --filename $PWD/disk-3.vdi --size 1024 --format VDI
-# }
-# 2) Obtain avilable storage comtrollers names:
-# - $ vboxmanage showvminfo sandbox
-
 Vagrant.configure('2') do |config|
 
-  # Enabling  X-Forwarding
-  config.ssh.forward_x11 = true
-  config.ssh.forward_agent = true
-
-  # Config Files
   config.vm.box = 'centos/7'
 
   config.vm.provider 'virtualbox' do |vb|
@@ -44,12 +29,16 @@ Vagrant.configure('2') do |config|
 
   config.vm.define 'sandbox' do |node1|
     node1.vm.provider 'virtualbox' do |vm|
-      vm.cpus = 2
-      vm.memory = 2048
+      vm.cpus = 1
+      vm.memory = 512
       vm.name = 'sandbox'
     end
-    node1.vm.hostname = 'sandbox'
-    node1.vm.network 'private_network', ip: '192.168.100.100'
   end
+
+
+  # Provision machine
+  config.vm.provision :shell, :inline  => '
+   sudo yum install -y lvm2*
+  '
 
 end
