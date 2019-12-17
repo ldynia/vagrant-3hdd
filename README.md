@@ -21,3 +21,25 @@ $ vboxmanage showvminfo sandbox
 
 # Notes
 Remember to run `vagrant destroy`.
+
+
+# Logic Volume Group  
+
+```bash
+# Crate physical volume
+$ pvcreate /dev/sdb /dev/sdc /dev/sdd
+
+# Crate volume group  
+$ vgcreate compare01_data_vg1 /dev/sdb /dev/sdc /dev/sdd
+$ vgchange -ay compare01_data_vg1
+
+# Create logical volume
+$ lvcreate -n data -l 100%VG compare01_data_vg1
+
+# Create file system on logical volume volume
+$ mkfs.ext4 /dev/mapper/compare01_data_vg1-data
+
+# Mount logical volume
+$ mkdir /mnt/compare_data
+$ mount -t ext4 /dev/mapper/compare01_data_vg1-data /mnt/compare_data/
+```
