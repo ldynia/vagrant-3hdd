@@ -42,4 +42,7 @@ $ mkfs.ext4 /dev/mapper/compare01_data_vg1-data
 # Mount logical volume
 $ mkdir /mnt/compare_data
 $ mount -t ext4 /dev/mapper/compare01_data_vg1-data /mnt/compare_data/
+
+# List block id
+$ blkid
 ```
