@@ -45,4 +45,8 @@ $ mount -t ext4 /dev/mapper/compare01_data_vg1-data /mnt/compare_data/
 
 # List block id
 $ blkid
+/dev/mapper/compare01_data_vg1-data: UUID="11d841c9-1902-4648-8b74-3a47de7396f7" TYPE="ext4"
+
+# Mount device in /etc/fstab
+UUID=11d841c9-1902-4648-8b74-3a47de7396f7 /mnt/storage            ext4    defaults	  0 0
 ```
